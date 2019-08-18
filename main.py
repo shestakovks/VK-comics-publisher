@@ -3,7 +3,6 @@ import os
 import random
 
 import requests
-import urllib3
 from dotenv import load_dotenv
 
 
@@ -28,7 +27,7 @@ def save_posted(posted, filename=None):
 
 
 def download_photo(url, path_to_file):
-    response = requests.get(url, verify=False)
+    response = requests.get(url)
     response.raise_for_status()
     with open(path_to_file, 'wb') as f:
         f.write(response.content)
@@ -149,7 +148,6 @@ if __name__ == "__main__":
     vk_api_version = os.getenv('VK_API_VERSION')
     vk_group_id = os.getenv('VK_GROUP_ID')
     posted = load_posted()
-    urllib3.disable_warnings()
 
     try:
         filename, comment = get_random_comics()
